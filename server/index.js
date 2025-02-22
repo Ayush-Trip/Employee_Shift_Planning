@@ -7,6 +7,7 @@ const {
   login,
 } = require("./controllers/authentication/authentication");
 const authenticationMiddileware = require("./middileware/authenticationMiddileware");
+const { createAvailability, getEmployeeAvailability } = require("./controllers/availability/availabilityController");
 
 dotenv.config();
 
@@ -21,6 +22,9 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
 
+
+router.post("/employee/availability", authenticationMiddileware, createAvailability)
+router.get("/employee/availability", authenticationMiddileware, getEmployeeAvailability)
 
 app.use(router);
 
