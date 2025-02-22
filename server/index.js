@@ -6,6 +6,7 @@ const {
   register,
   login,
 } = require("./controllers/authentication/authentication");
+const authenticationMiddileware = require("./middileware/authenticationMiddileware");
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ connectToDb();
 const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
+
 
 app.use(router);
 
