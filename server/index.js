@@ -10,6 +10,8 @@ const authenticationMiddileware = require("./middileware/authenticationMiddilewa
 const {
   createAvailability,
   getEmployeeAvailability,
+  getAllEmployees,
+  getEmployeeAvailabilityById
 } = require("./controllers/availability/availabilityController");
 const {
   getAvailableEmployees,
@@ -52,6 +54,8 @@ router.get(
   getAvailableEmployees
 );
 router.post("/admin/shifts", authenticationMiddileware, saveShift);
+router.get("/admin/getAllEmployees", authenticationMiddileware, getAllEmployees);
+router.get("/admin/availability", authenticationMiddileware, getEmployeeAvailabilityById);
 
 app.use(router);
 
