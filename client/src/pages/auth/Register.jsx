@@ -7,12 +7,14 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const navigate = useNavigate();
   const createUser = async () => {
     const data = {
       name,
@@ -22,6 +24,7 @@ const Register = () => {
     };
     await axios.post("http://localhost:5000/register", data);
     console.log("User Created");
+    navigate("/login")
   };
 
   return (

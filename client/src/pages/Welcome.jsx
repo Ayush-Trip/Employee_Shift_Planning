@@ -19,7 +19,6 @@
         <div className="container">
         <div className="welcome-section">
             <h1>Welcome to the Employee Shift Planning System</h1>
-            <p>Efficiently manage your employee schedules</p>
         </div>
 
         <div className="button-section">
