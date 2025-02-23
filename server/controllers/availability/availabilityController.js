@@ -34,8 +34,8 @@ const getEmployeeAvailability = async (req, res) => {
     if (!availability) {
       return res
         .status(404)
-        .json({ message: "Availability Not Found for this User" });
-    }
+        .json({ message: "Availability Not Found for this User"});
+    } 
     res.status(200).json(availability);
   } catch (err) {
     console.error(err);

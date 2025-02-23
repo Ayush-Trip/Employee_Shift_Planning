@@ -2,12 +2,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Availability from "./pages/employee/Availability";
+import Welcome from "./pages/Welcome";
 function App() {
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<></>}></Route>
+          <Route path="/" element={<Welcome />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route

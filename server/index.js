@@ -7,7 +7,15 @@ const {
   login,
 } = require("./controllers/authentication/authentication");
 const authenticationMiddileware = require("./middileware/authenticationMiddileware");
-const { createAvailability, getEmployeeAvailability } = require("./controllers/availability/availabilityController");
+const {
+  createAvailability,
+  getEmployeeAvailability,
+} = require("./controllers/availability/availabilityController");
+const {
+  getAvailableEmployees,
+  saveShift,
+  getShiftsForEmployee,
+} = require("./controllers/shifts/shifts");
 
 dotenv.config();
 
@@ -19,12 +27,31 @@ app.use(express.json());
 connectToDb();
 
 const router = express.Router();
+
+//Login SignIp Routes
 router.post("/register", register);
 router.post("/login", login);
 
+//Employees Routes
+router.post(
+  "/employee/availability",
+  authenticationMiddileware,
+  createAvailability
+);
+router.get(
+  "/employee/availability",
+  authenticationMiddileware,
+  getEmployeeAvailability
+);
+router.get("/employee/shifts", authenticationMiddileware, getShiftsForEmployee);
 
-router.post("/employee/availability", authenticationMiddileware, createAvailability)
-router.get("/employee/availability", authenticationMiddileware, getEmployeeAvailability)
+//admin routes
+router.get(
+  "/admin/availableEmployees",
+  authenticationMiddileware,
+  getAvailableEmployees
+);
+router.post("/admin/shifts", authenticationMiddileware, saveShift);
 
 app.use(router);
 
