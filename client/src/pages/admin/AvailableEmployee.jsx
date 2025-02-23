@@ -53,13 +53,14 @@ const AvailableEmployee = () => {
     );
     if (response.data.availabilities.length > 0) {
       setAvailableData(response.data.availabilities);
+    } else {
+      setAvailableData([]); 
     }
-    console.log(availableData);
   };
 
   useEffect(() => {
     getEmployeeAvailability();
-  }, [selectedEmployee]);
+  }, [selectedEmployee]); 
 
   return (
     <Box sx={{ padding: 3 }}>

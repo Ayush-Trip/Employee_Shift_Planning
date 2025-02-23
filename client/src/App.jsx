@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<Welcome />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          
+
           <Route
             path="/admin/shifts"
             element={<PrivateRoute element={<Shift />} />}
@@ -52,7 +52,7 @@ function App() {
             variant="contained"
             onClick={() => {
               localStorage.removeItem("token");
-              window.location.href = '/login';
+              window.location.href = "/login";
             }}
           >
             Logout
