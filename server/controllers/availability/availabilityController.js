@@ -1,4 +1,5 @@
 const Availability = require("../../models/Availability");
+const User = require("../../models/User")
 const createAvailability = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -55,7 +56,7 @@ const getEmployeeAvailability = async (req, res) => {
 
 const getAllEmployees = async (req, res) => {
   try {
-    const employees = await User({
+    const employees = await User.find({
       role: "employee",
     });
     return res.status(200).json({
