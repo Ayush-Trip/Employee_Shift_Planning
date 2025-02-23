@@ -15,6 +15,13 @@ dayjs.extend(isSameOrBefore);
 const getAvailableEmployees = async (req, res) => {
   try {
     const { timezone, date, startTime, endTime } = req.query;
+
+    if (!timezone || !date || !startTime || !endTime) {
+      return res
+        .status(400)
+        .json({ error: "Missing required query parameters" });
+    }
+
     const targetDate = dayjs.tz(date, timezone).utc().startOf("day");
     const targetStartTime = dayjs.tz(`${date} ${startTime}`, timezone);
     const targetEndTime = dayjs.tz(`${date} ${endTime}`, timezone);
@@ -22,6 +29,7 @@ const getAvailableEmployees = async (req, res) => {
     const availabilities = await Availability.find({
       "availability.date": targetDate.toDate(),
     }).populate("userId");
+
     const results = [];
 
     for (const availabilityDoc of availabilities) {
@@ -72,11 +80,9 @@ const getAvailableEmployees = async (req, res) => {
       }
     }
     res.json(results);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      error: "Internal Server Error.",
-    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 

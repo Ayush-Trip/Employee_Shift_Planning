@@ -9,7 +9,7 @@ const TimePickerComponent = (props) => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={["TimePicker", "TimePicker"]}>
         <TimePicker
-          label="Controlled picker"
+          label="Time"
           value={props.value}
           onChange={(newValue) => props.setValue(newValue)}
         />
