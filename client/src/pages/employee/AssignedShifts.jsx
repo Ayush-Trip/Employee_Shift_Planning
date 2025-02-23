@@ -8,6 +8,9 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Typography,
+  Box,
+  Container,
 } from "@mui/material";
 
 const AssignedShifts = () => {
@@ -29,9 +32,14 @@ const AssignedShifts = () => {
   }, []);
 
   return (
-    <div>
-      <h2> Assigned Shifts</h2>
-      <TableContainer component={Paper}>
+    <Container maxWidth="lg">
+      <Box sx={{ marginTop: 4, marginBottom: 2 }}>
+        <Typography variant="h4" component="h2" align="center">
+          Assigned Shifts
+        </Typography>
+      </Box>
+
+      <TableContainer component={Paper} sx={{ marginTop: 3 }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -41,17 +49,25 @@ const AssignedShifts = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {shifts.map((shift, index) => (
-              <TableRow key={index}>
-                <TableCell>{shift.date}</TableCell>
-                <TableCell>{shift.startTime}</TableCell>
-                <TableCell>{shift.endTime}</TableCell>
+            {shifts.length > 0 ? (
+              shifts.map((shift, index) => (
+                <TableRow key={index}>
+                  <TableCell>{shift.date}</TableCell>
+                  <TableCell>{shift.startTime}</TableCell>
+                  <TableCell>{shift.endTime}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={3} align="center">
+                  No shifts assigned.
+                </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </Container>
   );
 };
 

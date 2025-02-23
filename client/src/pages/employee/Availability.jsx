@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import TimePickerComponent from "../../components/TimePickerComponent";
 import DatePickerComponent from "../../components/DatePickerComponent";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
-import { Grid, Box, Typography } from "@mui/material";
+import { Grid, Box, Typography, Paper } from "@mui/material";
 import axios from "axios";
+import moment from "moment-timezone";
 import {
   Table,
   TableBody,
@@ -16,9 +17,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
 } from "@mui/material";
-import moment from "moment-timezone";
 
 const Availability = () => {
   const [timezone, setTimezone] = useState("");
@@ -46,6 +45,7 @@ const Availability = () => {
     ]);
     setAvailabilityData([...availabilityData, newAvailability]);
   };
+
   const handleChange = (index, field, value) => {
     const newAvailability = [...availability];
     newAvailability[index][field] = value;
@@ -110,18 +110,22 @@ const Availability = () => {
 
   return (
     <>
-      {/* Form */}
-      <Typography variant="h6">Set Your Availability</Typography>
-      <Grid container spacing={2}>
+      <Typography variant="h6" sx={{ marginBottom: 3 }}>
+        Set Your Availability
+      </Typography>
+
+      <Grid container spacing={3}>
         {availability.map((entry, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
-            <Box sx={{ border: "1px solid #ccc", padding: 2, borderRadius: 2 }}>
-              <Typography variant="body1" gutterBottom>
+            <Box sx={{ border: "1px solid #ccc", padding: 3, borderRadius: 2 }}>
+              <Typography variant="h6" sx={{ marginBottom: 2 }}>
                 Availability {index + 1}
               </Typography>
 
               <div>
-                <p>Date</p>
+                <Typography variant="body1" sx={{ marginBottom: 1 }}>
+                  Date
+                </Typography>
                 <DatePickerComponent
                   value={entry.date}
                   setValue={(newDate) => handleChange(index, "date", newDate)}
@@ -129,7 +133,9 @@ const Availability = () => {
               </div>
 
               <div>
-                <p>Start Time</p>
+                <Typography variant="body1" sx={{ marginBottom: 1 }}>
+                  Start Time
+                </Typography>
                 <TimePickerComponent
                   value={entry.startTime}
                   setValue={(newTime) =>
@@ -139,7 +145,9 @@ const Availability = () => {
               </div>
 
               <div>
-                <p>End Time</p>
+                <Typography variant="body1" sx={{ marginBottom: 1 }}>
+                  End Time
+                </Typography>
                 <TimePickerComponent
                   value={entry.endTime}
                   setValue={(newTime) =>
@@ -148,15 +156,15 @@ const Availability = () => {
                 />
               </div>
 
-              <p>
+              <Typography variant="body2" sx={{ marginTop: 2 }}>
                 <strong>Day:</strong> {entry.day}
-              </p>
+              </Typography>
             </Box>
           </Grid>
         ))}
       </Grid>
-      {/* Timezone Dropdown */}
-      <FormControl fullWidth>
+
+      <FormControl fullWidth sx={{ marginTop: 3 }}>
         <InputLabel id="timezone-dropdown">Timezone</InputLabel>
         <Select
           labelId="timezone-dropdown-label"
@@ -165,27 +173,24 @@ const Availability = () => {
           label="Timezone"
           onChange={(e) => setTimezone(e.target.value)}
         >
-          {allTimezones.map((timezone, index) => {
-            return (
-              <MenuItem value={timezone} key={index}>
-                {timezone}
-              </MenuItem>
-            );
-          })}
+          {allTimezones.map((timezone, index) => (
+            <MenuItem value={timezone} key={index}>
+              {timezone}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
 
-      {/* Add Availability for multiple days*/}
-      <Button variant="contained" onClick={handleAddAvailability}>
-        Add Availability
-      </Button>
+      <Box sx={{ display: "flex", gap: 2, marginTop: 3 }}>
+        <Button variant="contained" onClick={handleAddAvailability}>
+          Add Availability
+        </Button>
 
-      {/* Create Availability */}
-      <Button variant="contained" onClick={createAvailability} type="submit">
-        Create
-      </Button>
+        <Button variant="contained" onClick={createAvailability}>
+          Create Availability
+        </Button>
+      </Box>
 
-      {/* Table */}
       <TableContainer component={Paper} sx={{ marginTop: 3 }}>
         <Table>
           <TableHead>

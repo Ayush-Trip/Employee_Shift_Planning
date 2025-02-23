@@ -11,6 +11,8 @@ import Paper from "@mui/material/Paper";
 import dayjs from "dayjs";
 import DatePickerComponent from "../../components/DatePickerComponent";
 import TimePickerComponent from "../../components/TimePickerComponent";
+import { Box, Grid, Typography } from "@mui/material";
+
 const Shift = () => {
   const [shiftDate, setShiftDate] = useState(dayjs());
   const [shiftStartTime, setShiftStartTime] = useState(dayjs(`${dayjs()}`));
@@ -94,51 +96,63 @@ const Shift = () => {
   };
 
   return (
-    <div>
-      <div>
-        <p>Date</p>
-        <DatePickerComponent
-          value={shiftDate}
-          setValue={(newDate) => setShiftDate(newDate)}
-        />
-      </div>
-      <div>
-        <p>Start Time</p>
-        <TimePickerComponent
-          value={shiftStartTime}
-          setValue={(newTime) => setShiftStartTime(newTime)}
-        />
-      </div>
-      <div>
-        <p>End Time</p>
-        <TimePickerComponent
-          value={shiftEndTime}
-          setValue={(newTime) => setShiftEndTime(newTime)}
-        />
-      </div>
-      <FormControl fullWidth>
-        <InputLabel id="timezone-dropdown">Timezone</InputLabel>
-        <Select
-          labelId="timezone-dropdown-label"
-          id="timezone-dropdown-label"
-          value={timezone}
-          label="Timezone"
-          onChange={(e) => setTimezone(e.target.value)}
-        >
-          {allTimezones.map((timezone, index) => {
-            return (
-              <MenuItem value={timezone} key={index}>
-                {timezone}
-              </MenuItem>
-            );
-          })}
-        </Select>
-      </FormControl>
-      <Button variant="contained" onClick={checkEmployees}>
-        Check Employees
-      </Button>
+    <Box sx={{ padding: 3 }}>
+      <Typography variant="h5" gutterBottom>
+        Shift Scheduling
+      </Typography>
 
-      <Paper sx={{ height: 400, width: "100%" }}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <Typography variant="body1">Date</Typography>
+          <DatePickerComponent
+            value={shiftDate}
+            setValue={(newDate) => setShiftDate(newDate)}
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <Typography variant="body1">Start Time</Typography>
+          <TimePickerComponent
+            value={shiftStartTime}
+            setValue={(newTime) => setShiftStartTime(newTime)}
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <Typography variant="body1">End Time</Typography>
+          <TimePickerComponent
+            value={shiftEndTime}
+            setValue={(newTime) => setShiftEndTime(newTime)}
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <FormControl fullWidth>
+            <InputLabel id="timezone-dropdown">Timezone</InputLabel>
+            <Select
+              labelId="timezone-dropdown-label"
+              id="timezone-dropdown-label"
+              value={timezone}
+              label="Timezone"
+              onChange={(e) => setTimezone(e.target.value)}
+            >
+              {allTimezones.map((timezone, index) => (
+                <MenuItem value={timezone} key={index}>
+                  {timezone}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={12}>
+          <Button variant="contained" onClick={checkEmployees}>
+            Check Employees
+          </Button>
+        </Grid>
+      </Grid>
+
+      <Paper sx={{ height: 400, width: "100%", marginTop: 3 }}>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -151,10 +165,12 @@ const Shift = () => {
         />
       </Paper>
 
-      <Button variant="contained" onClick={saveShift}>
-        Save Shift
-      </Button>
-    </div>
+      <Box sx={{ marginTop: 2 }}>
+        <Button variant="contained" onClick={saveShift}>
+          Save Shift
+        </Button>
+      </Box>
+    </Box>
   );
 };
 

@@ -13,6 +13,8 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Box,
+  Typography,
 } from "@mui/material";
 
 const AvailableEmployee = () => {
@@ -38,7 +40,7 @@ const AvailableEmployee = () => {
     getAllEmployees();
   }, []);
 
-//   console.log(selectedEmployee);
+  //   console.log(selectedEmployee);
 
   const getEmployeeAvailability = async () => {
     const token = localStorage.getItem("token");
@@ -60,8 +62,11 @@ const AvailableEmployee = () => {
   }, [selectedEmployee]);
 
   return (
-    <div>
-      <h2> Employee Availability for Admin</h2>
+    <Box sx={{ padding: 3 }}>
+      <Typography variant="h5" gutterBottom>
+        Employee Availability for Admin
+      </Typography>
+
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Employee</InputLabel>
         <Select
@@ -69,18 +74,18 @@ const AvailableEmployee = () => {
           id="demo-simple-select"
           value={selectedEmployee}
           label="Employee"
-          onChange={(e) => {
-            setSelectedEmployee(e.target.value);
-          }}
+          onChange={(e) => setSelectedEmployee(e.target.value)}
         >
-          {employee.map((emp) => {
-            return <MenuItem value={emp._id}> {emp.name}</MenuItem>;
-          })}
+          {employee.map((emp) => (
+            <MenuItem key={emp._id} value={emp._id}>
+              {emp.name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
 
       {availableData.length > 0 ? (
-        <TableContainer component={Paper} style={{ marginTop: 20 }}>
+        <TableContainer component={Paper} sx={{ marginTop: 3 }}>
           <Table>
             <TableHead>
               <TableRow>
@@ -110,9 +115,11 @@ const AvailableEmployee = () => {
           </Table>
         </TableContainer>
       ) : (
-        <p>No availability data found.</p>
+        <Typography sx={{ marginTop: 2 }} variant="body1">
+          No availability data found.
+        </Typography>
       )}
-    </div>
+    </Box>
   );
 };
 

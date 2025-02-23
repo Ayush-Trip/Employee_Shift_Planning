@@ -1,36 +1,60 @@
-    import React from "react";
-    import { useNavigate } from "react-router-dom";
-    import Button from '@mui/material/Button';
-    import "../App.css"
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Box, Typography, Container, Grid } from '@mui/material';
 
+const Welcome = () => {
+  const navigate = useNavigate();
 
-    const Welcome = () => {
-    const navigate = useNavigate();
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
 
-    const handleLoginClick = () => {
-        navigate("/login"); 
-    };
+  const handleRegisterClick = () => {
+    navigate("/register");
+  };
 
-    const handleRegisterClick = () => {
-        navigate("/register"); 
-    };
+  return (
+    <Container component="main" maxWidth="xs">
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100vh',
+        }}
+      >
+        <Typography variant="h4" gutterBottom>
+          Welcome to the Employee Shift Planning System
+        </Typography>
 
-    return (
-        <div className="container">
-        <div className="welcome-section">
-            <h1>Welcome to the Employee Shift Planning System</h1>
-        </div>
+        <Box sx={{ width: '100%', textAlign: 'center' }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Button 
+                variant="contained" 
+                size="large" 
+                fullWidth 
+                onClick={handleLoginClick}
+              >
+                Login
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <Button 
+                variant="contained" 
+                size="large" 
+                fullWidth 
+                onClick={handleRegisterClick}
+              >
+                Register
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    </Container>
+  );
+};
 
-        <div className="button-section">
-            <Button variant="contained" size="large" onClick={handleLoginClick}>
-            Login
-            </Button>
-            <Button variant="contained" size="large" onClick={handleRegisterClick}>
-            Register
-            </Button>
-        </div>
-        </div>
-    );
-    };
-
-    export default Welcome;
+export default Welcome;

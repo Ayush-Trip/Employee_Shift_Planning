@@ -24,11 +24,14 @@ const Register = () => {
     };
     await axios.post("http://localhost:5000/register", data);
     console.log("User Created");
-    navigate("/login")
+    navigate("/login");
   };
 
   return (
+
+
     <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+    <h2> Register User</h2>
       <TextField
         id="name"
         label="Name"
@@ -48,7 +51,6 @@ const Register = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      {/* Role dropdown */}
       <FormControl fullWidth>
         <InputLabel id="role-dropdown">Role</InputLabel>
         <Select
@@ -63,7 +65,6 @@ const Register = () => {
         </Select>
       </FormControl>
 
-      {/* button to submit */}
       <Button variant="contained" onClick={createUser} type="submit">
         Register
       </Button>
