@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import PrivateRoute from "./PrivateRoute";
 import WelcomeEmployee from "./pages/employee/WelcomeEmployee";
 import WelcomeAdmin from "./pages/admin/WelcomeAdmin";
+import "./App.css"
 
 function App() {
   const token = localStorage.getItem("token");
