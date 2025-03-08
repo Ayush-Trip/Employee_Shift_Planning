@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Paper,
-} from "@mui/material";
+import { Box, TextField, Button, Typography, Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -49,7 +43,7 @@ const Login = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          filter: "blur(10px)", 
+          filter: "blur(10px)",
           zIndex: -1,
         }}
       />
@@ -62,7 +56,7 @@ const Login = () => {
           borderRadius: "20px",
           overflow: "hidden",
           background: "rgba(110, 110, 110, 0.6)",
-          backdropFilter: "blur(10px)", 
+          backdropFilter: "blur(10px)",
         }}
       >
         <Box
@@ -154,7 +148,12 @@ const Login = () => {
 
           <Typography sx={{ marginTop: "10px", color: "#b0b0b0" }}>
             Not a member?{" "}
-            <span style={{ color: "#ffb400", cursor: "pointer" }}>
+            <span
+              onClick={() => {
+                navigate("/register");
+              }}
+              style={{ color: "#ffb400", cursor: "pointer" }}
+            >
               Create an account
             </span>
           </Typography>
