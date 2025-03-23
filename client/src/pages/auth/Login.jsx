@@ -72,7 +72,18 @@ const Login = () => {
             color: "white",
           }}
         >
-          <Typography variant="h5" fontWeight="bold">
+          <Typography
+            variant="h5"
+            fontWeight="bold"
+            sx={{
+              position: "absolute",
+              bottom: "20px",
+              left: "20px",
+              background: "rgba(0, 0, 0, 0.6)",
+              padding: "10px 20px",
+              borderRadius: "10px",
+            }}
+          >
             Welcome Back To{" "}
             <span style={{ color: "#ffb400" }}>
               <br />
@@ -104,24 +115,41 @@ const Login = () => {
             fullWidth
             label="Email"
             variant="filled"
+            InputLabelProps={{ sx: { color: "#b0b0b0" } }}
             InputProps={{
               sx: {
-                background: "rgba(110, 110, 110, 0.6)",
+                background: "rgba(255, 255, 255, 0.1)",
                 color: "#fff",
+                borderRadius: "8px",
+                "&:hover": {
+                  background: "rgba(255, 255, 255, 0.2)",
+                },
+                "&.Mui-focused": {
+                  background: "rgba(255, 255, 255, 0.1) !important",
+                },
               },
             }}
             onChange={(e) => setEmail(e.target.value)}
             sx={{ marginBottom: "20px" }}
           />
+
           <TextField
             fullWidth
             label="Password"
             type="password"
             variant="filled"
+            InputLabelProps={{ sx: { color: "#b0b0b0" } }}
             InputProps={{
               sx: {
-                background: "rgba(110, 110, 110, 0.6)",
+                background: "rgba(255, 255, 255, 0.1)",
                 color: "#fff",
+                borderRadius: "8px",
+                "&:hover": {
+                  background: "rgba(255, 255, 255, 0.2)",
+                },
+                "&.Mui-focused": {
+                  background: "rgba(255, 255, 255, 0.1) !important",
+                },
               },
             }}
             onChange={(e) => setPassword(e.target.value)}
